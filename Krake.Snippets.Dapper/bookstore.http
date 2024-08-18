@@ -1,0 +1,27 @@
+﻿@BookStore = http://localhost:5000
+
+### Create a new customer
+POST {{BookStore}}/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Jimmy Moe",
+    "email": "jmoe@booknerd.com"
+}
+
+### Find a customer by id
+GET {{BookStore}}/customers/3
+Accept: application/json
+
+### List all books
+GET {{BookStore}}/books
+Accept: application/json
+
+### List all orders
+GET {{BookStore}}/orders
+Accept: application/json
+
+### Get Sales statistics
+GET {{BookStore}}/sales-statistics
+Accept: application/json
