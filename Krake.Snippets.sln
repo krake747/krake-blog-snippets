@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krake.Snippets.Dapper", "Kr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krake.Snippets.FeatureFlags", "Krake.Snippets.FeatureFlags\Krake.Snippets.FeatureFlags.csproj", "{44A83528-59B9-4B7A-9F6F-089C82F7C5AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krake.Snippets.Serilog", "Krake.Snippets.Serilog\Krake.Snippets.Serilog.csproj", "{353426C3-5F7B-42CE-8661-B8410621B148}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krake.Snippets.GlobalExceptions", "Krake.Snippets.GlobalExceptions\Krake.Snippets.GlobalExceptions.csproj", "{B69D3F50-01A5-4C17-BBB2-991AE2B369FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{44A83528-59B9-4B7A-9F6F-089C82F7C5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44A83528-59B9-4B7A-9F6F-089C82F7C5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44A83528-59B9-4B7A-9F6F-089C82F7C5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{353426C3-5F7B-42CE-8661-B8410621B148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{353426C3-5F7B-42CE-8661-B8410621B148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{353426C3-5F7B-42CE-8661-B8410621B148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{353426C3-5F7B-42CE-8661-B8410621B148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69D3F50-01A5-4C17-BBB2-991AE2B369FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69D3F50-01A5-4C17-BBB2-991AE2B369FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69D3F50-01A5-4C17-BBB2-991AE2B369FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69D3F50-01A5-4C17-BBB2-991AE2B369FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
