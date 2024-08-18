@@ -16,7 +16,7 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello BookStore!");
 
 // Basic Commands with Dapper
-app.MapPost("/customers", async (IDbConnectionFactory dbConnectionFactory, Customer customer) =>
+app.MapPost("/customers", static async (IDbConnectionFactory dbConnectionFactory, Customer customer) =>
 {
     using var connection = await dbConnectionFactory.CreateConnectionAsync();
 
@@ -33,7 +33,7 @@ app.MapPost("/customers", async (IDbConnectionFactory dbConnectionFactory, Custo
 });
 
 // Basic Querying with Dapper
-app.MapGet("/customers/{id:int}", async (IDbConnectionFactory dbConnectionFactory, int id) =>
+app.MapGet("/customers/{id:int}", static async (IDbConnectionFactory dbConnectionFactory, int id) =>
 {
     using var connection = await dbConnectionFactory.CreateConnectionAsync();
 
@@ -50,7 +50,7 @@ app.MapGet("/customers/{id:int}", async (IDbConnectionFactory dbConnectionFactor
 });
 
 // Mapping complex types with Dapper
-app.MapGet("/books", async (IDbConnectionFactory dbConnectionFactory) =>
+app.MapGet("/books", static async (IDbConnectionFactory dbConnectionFactory) =>
 {
     using var connection = await dbConnectionFactory.CreateConnectionAsync();
 
@@ -85,7 +85,7 @@ app.MapGet("/books", async (IDbConnectionFactory dbConnectionFactory) =>
 });
 
 // Mapping complex types with Dapper
-app.MapGet("/orders", async (IDbConnectionFactory dbConnectionFactory) =>
+app.MapGet("/orders", static async (IDbConnectionFactory dbConnectionFactory) =>
 {
     using var connection = await dbConnectionFactory.CreateConnectionAsync();
 
@@ -136,7 +136,7 @@ app.MapGet("/orders", async (IDbConnectionFactory dbConnectionFactory) =>
 });
 
 // Handling multiple result sets with Dapper
-app.MapGet("/sales-statistics", async (IDbConnectionFactory dbConnectionFactory) =>
+app.MapGet("/sales-statistics", static async (IDbConnectionFactory dbConnectionFactory) =>
 {
     using var connection = await dbConnectionFactory.CreateConnectionAsync();
 
