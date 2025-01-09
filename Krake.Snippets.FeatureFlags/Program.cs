@@ -35,6 +35,28 @@ app.MapGet("feature-c", () => Results.Ok("Hello from Feature C"))
 app.MapGet("feature-d", () => Results.Ok("Hello from Feature D"))
     .AddEndpointFilter<FeatureFilter>();
 
+app.MapGet("feature-flags", async (IFeatureManager manager, CancellationToken token = default) =>
+{
+    Dictionary<string, bool> featureFlags = [];
+    await foreach (var featureName in manager.GetFeatureNamesAsync())
+    {
+        featureFlags[featureName] = await manager.IsEnabledAsync(featureName);
+    }
+
+    return Results.Ok(new { FeatureFlags = featureFlags });
+});
+
+app.MapGet("feature-flags/{flag}", static async ([FromServices] IFeatureManager manager, [FromRoute] string flag) =>
+{
+    var enabled = await manager.IsEnabledAsync(flag);
+    if (enabled)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(new { FeatureFlag = flag, Enabled = enabled });
+});
+
 app.Run();
 
 namespace Krake.Snippets.FeatureFlags
