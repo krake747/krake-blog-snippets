@@ -40,7 +40,7 @@ app.MapGet("feature-flags", async (IFeatureManager manager, CancellationToken to
     Dictionary<string, bool> featureFlags = [];
     await foreach (var featureName in manager.GetFeatureNamesAsync())
     {
-        featureFlags[featureName] = await manager.IsEnabledAsync(featureName);
+        featureFlags[featureName] = await manager.IsEnabledAsync(featureName, token);
     }
 
     return Results.Ok(new { FeatureFlags = featureFlags });
