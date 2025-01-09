@@ -8,6 +8,8 @@ builder.Services.AddFeatureManagement(builder.Configuration.GetSection("FeatureF
 
 var app = builder.Build();
 
+app.MapGet("/", () => "Hello Feature Flags!");
+
 app.MapGet("feature-a", static () => Results.Ok("Hello from Feature A"));
 
 app.MapGet("feature-b", static async ([FromServices] IFeatureManager manager) =>
@@ -35,6 +37,7 @@ app.MapGet("feature-c", () => Results.Ok("Hello from Feature C"))
 app.MapGet("feature-d", () => Results.Ok("Hello from Feature D"))
     .AddEndpointFilter<FeatureFilter>();
 
+// Return all feature flags and their statuses
 app.MapGet("feature-flags", async (IFeatureManager manager, CancellationToken token = default) =>
 {
     Dictionary<string, bool> featureFlags = [];
@@ -46,16 +49,20 @@ app.MapGet("feature-flags", async (IFeatureManager manager, CancellationToken to
     return Results.Ok(new { FeatureFlags = featureFlags });
 });
 
-app.MapGet("feature-flags/{flag}", static async ([FromServices] IFeatureManager manager, [FromRoute] string flag) =>
-{
-    var enabled = await manager.IsEnabledAsync(flag);
-    if (enabled)
-    {
-        return Results.NotFound();
-    }
+// Return the value of a specific feature flag (true/false)
+app.MapGet("feature-flags/{featureName}",
+    static async ([FromServices] IFeatureManager manager, [FromRoute] string featureName,
+            CancellationToken token = default) =>
+        await manager.IsEnabledAsync(featureName, token)
+);
 
-    return Results.Ok(new { FeatureFlag = flag, Enabled = enabled });
-});
+// Return 404 if a specific feature flag is not enabled else OK 200
+app.MapGet("/feature-flags/{featureName}/status",
+    async ([FromServices] IFeatureManager manager, string featureName, CancellationToken token = default) =>
+    await manager.IsEnabledAsync(featureName, token) is false
+        ? Results.NotFound(new { Message = $"Feature flag '{featureName}' is not enabled or does not exist." })
+        : Results.Ok(new { Message = $"Feature flag '{featureName}' is enabled." })
+);
 
 app.Run();
 
